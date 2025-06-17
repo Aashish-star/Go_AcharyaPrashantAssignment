@@ -28,4 +28,5 @@ PART 2 Expire Token
 curl --location "http://localhost:8080/user/authorize-token" ^ --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTAxNTE1ODIsInVzZXJuYW1lIjoiYWJjeHl6In0.FuzINDJGLMVy-v1zFTJByJYoPHiwPJJTLYuSx2c8L7E" ^ --header "Content-Type: application/json" ^ --data-raw "{"email": "abcxyz@gmail.com", "password": "abcxyz1123", "userName": "abcxyz"}"
 
 PART 3 Invalid Token
+
 curl --location "http://localhost:8080/user/authorize-token" ^ --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTAxNTMxMDAsInVzZXJuYW1lIjoiYWJjeHl6In0.5UADSjqwvteZqhDuYqbwe13xjxSZsWJTzLANU2MrDA" ^ --header "Content-Type: application/json" ^ --data-raw "{"email": "abcxyz@gmail.com", "password": "abcxyz1123", "userName": "abcxyz"}"
