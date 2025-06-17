@@ -18,7 +18,7 @@ curl --location "http://localhost:8080/user/sign-in" ^
 
 For the validation of token accessToken will be received from SIGN IN API. Use that in place of VALID_TOKEN to authorise it
 # API 3 Authorise token
- PART 1 Valid Token
+ PART 1 Valid Token (DEPENDENT ON API2)
  
 curl --location "http://localhost:8080/user/authorize-token" ^ --header "Authorization: VALID_TOKEN" ^ --header "Content-Type: application/json" ^  --data-raw "{\"email\": \"Test@gmail.com\", \"password\": \"Test1123\", \"name\": \"Test\"}"
 
