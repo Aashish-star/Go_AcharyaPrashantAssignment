@@ -12,7 +12,6 @@ func GetUserCountByEmail(Email string) int64 {
 	database.DB.Model(&model.UserEntity{}).Where("email = ?", Email).Count(&count)
 	fmt.Printf("Total record ", count)
 	return count
-
 }
 
 func SaveUser(user *model.UserEntity) int64 {
@@ -23,5 +22,4 @@ func SaveUser(user *model.UserEntity) int64 {
 	}
 	database.DB.Create(&user)
 	return 200
-
 }

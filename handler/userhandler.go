@@ -9,6 +9,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+const TOKEN_IS_VALID = "Token is valid"
+
 func SignUp(c *gin.Context) {
 	var request model.UserRequest
 	error := c.ShouldBindJSON(&request)
@@ -44,9 +46,8 @@ func SignIn(c *gin.Context) {
 	fmt.Printf("newUser request ", request)
 	if error != nil {
 		fmt.Printf("Error found")
-		c.JSON(http.StatusBadGateway, "Error in CreateUser")
+		c.JSON(http.StatusBadGateway, "Invalid request")
 		return
-
 	}
 	count := GetUserCountByEmail(request.Email)
 	var response model.UserResponse
@@ -70,9 +71,17 @@ func RefreshJwtToken(c *gin.Context) {
 	token := c.GetHeader("Authorization")
 	var request model.UserRequest
 	var response model.UserResponse
-	message := utils.ValidateToken(token)
 	c.ShouldBindJSON(&request)
-	if message == "Token is valid" {
+	tokenUsername := utils.GetUsernameFromToken(token)
+	fmt.Println("tokenUsername ", tokenUsername)
+
+	message := utils.ValidateToken(token)
+
+	if tokenUsername != request.Name {
+		fmt.Println("request ", request)
+		response.IsSucess = false
+		response.Message = "Invalid username"
+	} else if message == TOKEN_IS_VALID {
 		accessToken := utils.GenerateJWT(request.Name)
 		refreshToken := utils.GenerateRefreshToken(request.Name)
 		fmt.Println("Generated Access Token ", accessToken)
@@ -84,7 +93,6 @@ func RefreshJwtToken(c *gin.Context) {
 		response.IsSucess = false
 	}
 	c.JSON(http.StatusOK, response)
-
 }
 
 func AuthorizeToken(c *gin.Context) {

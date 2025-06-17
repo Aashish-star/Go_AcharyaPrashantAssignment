@@ -5,6 +5,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Aashish-star/Go_AcharyaPrashantAssignment/model"
 	"github.com/golang-jwt/jwt/v5"
 )
 
@@ -35,7 +36,24 @@ func GenerateRefreshToken(username string) string {
 	if err != nil {
 		fmt.Printf("Error while generating token ", err)
 	}
-	return tokenStr
+	return "Bearer " + tokenStr
+}
+
+func GetUsernameFromToken(tokenIn string) string {
+
+	tokenString := strings.TrimPrefix(tokenIn, "Bearer ")
+
+	// Parse the token
+	claims := &model.JwtClaims{}
+
+	token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+		return secretKey, nil
+	})
+	fmt.Println("Token err ", err)
+	if err == nil && token.Valid {
+		return claims.Username
+	}
+	return ""
 }
 
 func ValidateToken(token string) string {
@@ -43,7 +61,6 @@ func ValidateToken(token string) string {
 	if strings.HasPrefix(token, "Bearer ") {
 
 		tokenString := strings.TrimPrefix(token, "Bearer ")
-		fmt.Println("Incoming tokenString", tokenString)
 		// Parse the token
 
 		claims := &jwt.RegisteredClaims{}

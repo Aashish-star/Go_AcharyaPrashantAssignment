@@ -31,7 +31,7 @@ PART 3 Invalid Token
 
 curl --location "http://localhost:8080/user/authorize-token" ^ --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTAxNTMxMDAsInVzZXJuYW1lIjoiYWJjeHl6In0.5UADSjqwvteZqhDuYqbwe13xjxSZsWJTzLANU2MrDA" ^ --header "Content-Type: application/json" ^  --data-raw "{\"email\": \"Test@gmail.com\", \"password\": \"Test1123\", \"name\": \"Test\"}"
 
-# Refresh Token (Dependent API on API2)
+# API4 Refresh Token (Dependent API on API2)
 
 You will get the REFRESH_TOKEN from SIGN_API, Replace REFRESH_TOKEN with the actual value received from SIGN_API 
 
