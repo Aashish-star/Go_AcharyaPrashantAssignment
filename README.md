@@ -1,3 +1,6 @@
+# Command to run 
+go run main.go
+
 # API1 Sign Up(1st Test case) (User created Successfully)
 
 curl --location "http://localhost:8080/user/sign-up" ^ --header "Content-Type: application/json" ^ --data-raw "{\"email\": \"abcxyz@gmail.com\", \"password\": \"abcxyz1123\", \"name\": \"abcxyz\"}"
