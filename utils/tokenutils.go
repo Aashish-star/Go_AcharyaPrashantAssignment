@@ -14,7 +14,7 @@ var secretKey = []byte("abcxyz")
 func GenerateJWT(username string) string {
 	claims := jwt.MapClaims{
 		"username": username,
-		"exp":      time.Now().Add(time.Minute * 15).Unix(), // Token expires in 15 hour
+		"exp":      time.Now().Add(time.Hour * 60).Unix(), // Token expires in 15 hour
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
